@@ -1,0 +1,143 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: rgb(12, 12, 12);
+    color: rgb(255, 255, 255);
+    margin: 0 auto;
+    padding: 1rem 1rem;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+}
+.title {
+    flex-direction: column;
+    margin: 1rem 1.5rem;
+    line-height: 2rem;
+    color: rgb(209, 209, 209);
+    font-weight: bolder;
+}
+
+ul {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 2rem;
+    gap: 2rem;
+    color: white;
+}
+
+a {
+    list-style: none;
+    text-decoration: none;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: 0.35s;
+}
+a:hover {
+    opacity: 1;
+    color: rgb(187, 187, 0);
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    margin: 50px;
+}
+
+img {
+    width: 600px;
+    height: 400px;
+}
+
+h2 {
+    font-size: 50px;
+    line-height: 2.8rem;
+}
+
+span {
+    color: rgb(187, 187, 0);
+}
+
+p {
+    margin-top: 1rem;
+    max-width: 500px;
+    align-items: center;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 1rem;
+    margin-top: 1rem;
+    max-width: 100%;
+    width: 500px;
+    gap: 1rem;
+}
+
+input {
+    padding: 8px;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    width: 500px;
+}
+
+.form-container [type= "submit"] {
+    margin-top: 1rem;
+    width: 100px;
+    align-items: center;
+    font-size: 1rem;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: 0.3s;
+}
+
+.form-container [type= "submit"]:hover {
+    opacity: 1;
+    background-color: rgb(187, 187, 0);
+    color: black;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 760px) {
+
+    header {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 10px auto; 
+    }
+
+    main {
+        flex-direction: column;
+    }
+
+    .form-container {
+        margin: 20px auto;
+    }
+
+    .form-container input {
+        width: 300px;
+    }
+
+    img {
+        display: none;
+
+    }
+}
+
+
