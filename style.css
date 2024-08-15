@@ -76,7 +76,7 @@ p {
     align-items: center;
 }
 
-.form-container {
+#form-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -96,7 +96,7 @@ input {
     width: 500px;
 }
 
-.form-container [type= "submit"] {
+#form-container [type= "submit"] {
     margin-top: 1rem;
     width: 100px;
     align-items: center;
@@ -106,11 +106,16 @@ input {
     transition: 0.3s;
 }
 
-.form-container [type= "submit"]:hover {
+#form-container [type= "submit"]:hover {
     opacity: 1;
     background-color: rgb(187, 187, 0);
     color: black;
     font-weight: bold;
+}
+
+#message {
+    color: white;
+    font-size: 25px;
 }
 
 @media screen and (max-width: 760px) {
@@ -126,11 +131,11 @@ input {
         flex-direction: column;
     }
 
-    .form-container {
+    #form-container {
         margin: 20px auto;
     }
 
-    .form-container input {
+    #form-container input {
         width: 300px;
     }
 

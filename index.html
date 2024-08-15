@@ -6,7 +6,7 @@
     <title>Landing Page</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBO5FC2j1fVcF5UQMIKQPpEa0lzWBBGCm0&libraries=places"></script>
 </head>
 <body>
     <header>
@@ -26,19 +26,72 @@
             <h2><span>Preencha o Formulário</span></h2>
             <h2>Com sua localização para Entrega</h2>
             <p>É um formulário, para o usuário se cadastrar no site, colocando seus dados e principalmente sua localização, onde veremos se podemos realizar o pedido até o destinário do cliente, lembrando que não fazemos entregas em toda Fortaleza. Aproveitem. </p>
-            <form class="form-container">
-                <label>Nome:</label>
-                <input type="text" placeholder="Digite seu Nome...">
-                <label>E-mail:</label>
-                <input type="email" placeholder="Digite seu E-mail">
-                <label>Endereço:</label>
-                <input type="text" placeholder="Digite seu Endereço"> 
+            <form id="form-container">
+                <label for="name">Nome:</label>
+                <input type="text" id="name" placeholder="Digite seu Nome..." required> 
+                <label for="phone">Fone:</label>
+                <input type="tel" id="phone" placeholder="Digite seu número para contato" required> 
+                <label for="address">Endereço:</label>
+                <input type="text" id="address" placeholder="Digite seu Endereço Corretamente" required> 
                 <input type="submit" value="Enviar">
             </form>
+
+            <p id="message"></p>
         </aside>
         <article>
             <img src="img/Figura-Pastel-PNG.webp" alt="Pastel bem gostos">
         </article>
     </main>
+
+    <script>
+        document.getElementById('form-container').addEventListener('submit', function(event) {
+            event.preventDefault();  // Intercepta o envio do formulário
+
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+
+            console.log("Nome:", name);
+            console.log("Telefone:", phone);
+            console.log("Endereço:", address);
+
+            if (!address) {
+                document.getElementById('message').innerText = 'Por favor, insira um endereço válido.';
+                return;
+            }
+
+            const geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'address': address }, function(results, status) {
+                if (status == 'OK') {
+                    const destination = results[0].geometry.location;
+
+                    const service = new google.maps.DistanceMatrixService();
+                    const origin = { lat: -3.7998301613312773, lng: -38.60588362292603 };
+                    service.getDistanceMatrix({
+                        origins: [origin],
+                        destinations: [destination],
+                        travelMode: 'DRIVING',
+                    }, function(response, status) {
+                        if (status == 'OK') {
+                            const distanceInKm = response.rows[0].elements[0].distance.value / 1000;
+
+                            if (distanceInKm <= 50) {
+                                document.getElementById('message').innerText = 'Entrega disponível!';
+                                alert('Entrega disponível!');
+                                console.log(`Distância calculada: ${distanceInKm} km`);
+                            } else {
+                                document.getElementById('message').innerText = 'Desculpe, a entrega só é permitida em um raio de 50 km.';
+                                alert('Desculpe, a entrega só é permitida em um raio de 50 km.');
+                            }
+                        } else {
+                            console.error('Erro ao calcular a distância:', status);
+                        }
+                    });
+                } else {
+                    document.getElementById('message').innerText = 'Geocode não foi bem-sucedido: ' + status;
+                }
+            });
+        });
+    </script>
 </body>
 </html>
